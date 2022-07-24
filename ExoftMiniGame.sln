@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExoftMiniGame", "ExoftMiniGame\ExoftMiniGame.csproj", "{3D121926-EC7D-4674-9F7B-BB6E6047FD99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D121926-EC7D-4674-9F7B-BB6E6047FD99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D121926-EC7D-4674-9F7B-BB6E6047FD99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D121926-EC7D-4674-9F7B-BB6E6047FD99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D121926-EC7D-4674-9F7B-BB6E6047FD99}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DDFDC6D7-80B4-44C7-AAE1-66D5AA281EB5}
+	EndGlobalSection
+EndGlobal
