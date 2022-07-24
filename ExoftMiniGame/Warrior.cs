@@ -3,48 +3,81 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SuperPower;
 
-namespace Warrior
+namespace Warriors
 {
     abstract class Warrior
     {
         protected int hp = 100;
         protected int armor;
         protected int attack;
+        public int HP { get { return hp; } set { hp = value; } }
+        public int Attack { get { return attack; } set { attack = value; } }
+        public int Armor {get { return armor; }
+        set { armor = value; }}
 
-        void setAttribute(int armor,int attack)
+        public virtual void AddSuperPower( ISuperPower superPower, int x) 
         {
-            this.armor = armor;
-            this.attack = attack;
-        }
-        public int getAttack ()
-        {
-            return armor;
+            superPower.AddSuperPower(this, x);
         }
 
+
+            
+
+        
     }
 
     internal class Archer : Warrior
     {
-        int armor = 8;
-        int attack = 12;
+        public string name;
+        public Archer()
+        {
+            attack = 12;
+            armor = 8;
+        }
+        public override void AddSuperPower(ISuperPower superPower, int x)
+        {
+            superPower.AddSuperPower(this, x);
+        }
     }
 
     internal class Swordman : Warrior
     {
-        int armor = 10;
-        int attack = 10;
+        public Swordman()
+        {
+            armor = 10;
+            attack = 10;
+        }
+        public override void AddSuperPower(ISuperPower superPower, int x)
+        {
+            superPower.AddSuperPower(this, x);
+        }
     }
 
     internal class Paladin : Warrior
     {
-        int armor = 15;
-        int attack = 5;
+        public Paladin()
+        {
+            armor = 15;
+            attack = 5;
+        }
+        public override void AddSuperPower(ISuperPower superPower, int x)
+        {
+            superPower.AddSuperPower(this, x);
+        }
     }
 
     internal class Mage : Warrior
     {
-        int armor = 5;
-        int attack = 15;
+        public Mage()
+        {
+            armor = 5;
+            attack = 15;
+        }
+        public override void AddSuperPower(ISuperPower superPower, int x)
+        {
+            superPower.AddSuperPower(this, x);
+        }
     }
 }
