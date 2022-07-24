@@ -7,7 +7,7 @@ using Warriors;
 
 namespace SuperPower
 {
-    internal interface ISuperPower
+    public interface ISuperPower
     {
         void AddSuperPower(Warrior warrior, int power);
     }
