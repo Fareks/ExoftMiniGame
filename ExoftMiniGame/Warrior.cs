@@ -12,7 +12,8 @@ namespace Warriors
         protected int hp = 100;
         protected int armor;
         protected int attack;
-        
+        public string name;
+
         public int HP { get { return hp; } set { hp = value; } }
         public int Attack { get { return attack; } set { attack = value; } }
         public int Armor {get { return armor; }
@@ -39,21 +40,25 @@ namespace Warriors
                 if (enemy_damage > 1)
                 {   
                     if ((enemy_damage/2) > armor)
-                    //якщо дамагу більше, аніж може впитати броня
+                    //якщо дамагу більше, аніж може впитати броня 
                     {
                         hp -= enemy_damage - armor;
                         armor = 0;
+                    } else
+                    {
+                        armor -= enemy_damage / 2;
+                        hp -= enemy_damage - (enemy_damage / 2); //враховуємо 
+                                                                 //залишок від ділення чілочисельного int
                     }
-                    armor -= enemy_damage / 2;
-                    hp -= enemy_damage - (enemy_damage / 2); //враховуємо 
-                                                             //залишок від ділення чілочисельного int
+
                 }
                 else if (enemy_damage == 1)
                 {
                     armor -= enemy_damage;
                 }
+            } else { 
+                hp -= enemy_damage;                   
             }
-            Console.WriteLine($"Defence! My actual armor is: {armor}");
         }
 
         public int Damage()
@@ -63,11 +68,12 @@ namespace Warriors
                 return attack;
             } else
             {
-                if (attack > 1 )
+                if (attack > 1)
                 {
                     attack--;
                 }
                 return attack;
+                
             }
         }
     }
@@ -79,6 +85,7 @@ namespace Warriors
         {
             attack = 12;
             armor = 8;
+            name = "Archer";
         }
         public override void AddSuperPower(ISuperPower superPower, int x)
         {
@@ -92,6 +99,7 @@ namespace Warriors
         {
             armor = 10;
             attack = 10;
+            name = "Swordman";
         }
         public override void AddSuperPower(ISuperPower superPower, int x)
         {
@@ -105,6 +113,7 @@ namespace Warriors
         {
             armor = 15;
             attack = 5;
+            name = "Paladin";
         }
         public override void AddSuperPower(ISuperPower superPower, int x)
         {
@@ -118,6 +127,7 @@ namespace Warriors
         {
             armor = 5;
             attack = 15;
+            name = "Mage";
         }
         public override void AddSuperPower(ISuperPower superPower, int x)
         {
