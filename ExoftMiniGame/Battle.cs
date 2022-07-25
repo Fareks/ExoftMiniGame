@@ -22,7 +22,7 @@ namespace Battles
                 Console.WriteLine($"Round {round}. Fight!");
                     Console.WriteLine("______________________");
                     player2.Defence(player1.Damage());
-                    Console.WriteLine($"Player 1 attacks and deals -{player2.Attack} damage!");
+                    Console.WriteLine($"Player 1 attacks and deals -{player1.Attack} damage!");
 
                     player1.Defence(player2.Damage());
                     Console.WriteLine($"Player 2 attacks and deals -{player2.Attack} damage!");
