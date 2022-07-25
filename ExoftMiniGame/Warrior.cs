@@ -35,11 +35,11 @@ namespace Warriors
 
         public void Defence(int enemy_damage)
         {
-            if (armor > 0)
+            if (armor > 0) //якщо є армор
             {
-                if (enemy_damage > 1)
+                if (enemy_damage > 1)//а шкода > 1
                 {   
-                    if ((enemy_damage/2) > armor)
+                    if ((enemy_damage/2) >= armor)
                     //якщо дамагу більше, аніж може впитати броня 
                     {
                         hp -= enemy_damage - armor;
