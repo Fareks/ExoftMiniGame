@@ -33,12 +33,12 @@ namespace Battles
                     round++;
                 if(!player1.isAlive())
                 {
-                    Console.WriteLine("PLayer 2 win!");
+                    Console.WriteLine("Player 2 win!");
                     break;
                 } else
                 if (!player2.isAlive())
                 {
-                    Console.WriteLine("PLayer 1 win!");
+                    Console.WriteLine("Player 1 win!");
                     break;
                 }
             }
