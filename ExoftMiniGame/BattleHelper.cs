@@ -35,10 +35,18 @@ namespace BattleHelpers
                     2 => new Swordman(),
                     3 => new Paladin(),
                     4 => new Mage(),
+                    5 => new Archer()+ new Mage(),
                     _ => null,
                 };
             }
             return null;
+        }
+    }
+    public static class MyExt
+    {
+        public static void AddHP<T>(this T hero, int moreHP) where T : Warrior
+        {
+               hero.HP += moreHP;
         }
     }
 }
