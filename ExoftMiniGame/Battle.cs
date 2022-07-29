@@ -11,14 +11,13 @@ namespace Battles
     public static class Battle
     {
         
-        public static void StartBattle(Warrior player1, Warrior player2,int delay)
+        public static async Task StartBattle(Warrior player1, Warrior player2,int delay)
         {
             int roundCount = 1;
             int[] current_damage = new int[2];
             
                 do
                 {
-                Thread.Sleep(delay);
                 Console.WriteLine($"Round {++roundCount}");
                     player2.Defense(player1.Damage());
                     Console.WriteLine($"Player 1 attacks and deals -{player1.Attack} damage!");
@@ -27,6 +26,7 @@ namespace Battles
                     Console.WriteLine($"Player 1: HP: {player1.HP}, Armor: {player1.Armor}");
                     Console.WriteLine($"Player 2: HP: {player2.HP}, Armor: {player2.Armor}");
                     Console.WriteLine($"Round finished! ");
+                await Task.Delay(200);
                 } while (player1.isAlive() && player2.isAlive());
 
                 var winner = player1.isAlive()
