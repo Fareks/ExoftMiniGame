@@ -11,16 +11,15 @@ namespace Battles
     public static class Battle
     {
         
-        public static void StartBattle(Warrior player1, Warrior player2)
+        public static void StartBattle(Warrior player1, Warrior player2,int delay)
         {
             int roundCount = 1;
             int[] current_damage = new int[2];
-
-            while (player1.isAlive() && player2.isAlive())
-            {
+            
                 do
                 {
-                    Console.WriteLine($"Round {++roundCount}");
+                Thread.Sleep(delay);
+                Console.WriteLine($"Round {++roundCount}");
                     player2.Defense(player1.Damage());
                     Console.WriteLine($"Player 1 attacks and deals -{player1.Attack} damage!");
                     player1.Defense(player2.Damage());
@@ -48,8 +47,6 @@ namespace Battles
                 {
                     Console.WriteLine("No winners");
                 }
-            }
-
     }
 
         
