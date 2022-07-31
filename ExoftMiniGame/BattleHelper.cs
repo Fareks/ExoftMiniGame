@@ -4,24 +4,54 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Warriors;
+using Battles;
 namespace BattleHelpers
 {
     public static class BattleHelper
     {
+        public static void StartAllBattles (List<Warrior> AllHeroes)
+        {
+            //var battles = new List<Task>();
+            for (int x=0; x < (AllHeroes.Count -1); x+=2)
+            {
+                Task task;
+                
+                task = new Task(async () => Battle.StartBattle(AllHeroes[x], AllHeroes[x+1], 100));
+                Console.WriteLine($"Task started. Heroes: {AllHeroes[x].name} vs {AllHeroes[x + 1].name}");
+                //StartBattle завжди забускає всі битви з останніми обраними воїнами!
+                task.Start();
 
-        public static void HeroesMenu()
+                if( (x+2) > AllHeroes.Count-1)
+                {
+                    break;
+                }
+            }
+
+        }
+        public static List<Warrior> GetHeroesList()
         {
             List<Warrior> heroes = new List<Warrior>();
-            Console.WriteLine("Please, choose num pairs of fighters (example: 2 pairs = 4 fighters)");
-            int num =  int.Parse(Console.ReadLine());
+            int num = 0;
+            do
+            {
+                Console.WriteLine("Please, choose num pairs of fighters (example: 2 pairs = 4 fighters). Max: 100");
+                num = int.Parse(Console.ReadLine());
+                if (num < 1 || num > 101)
+                {
+                    num = 0;
+                    Console.WriteLine("Please, try again.");
+                }
+            }
+            while (num == 0);
+
+
             for (int i=0; i<num; i++)
             {
-                heroes.Add(BattleHelper.GenerateHero("Player 1, choose your hero: 1. Archer, 2. Swordman, 3. Paladin, 4. Mage, 5. Morphling"));
+                heroes.Add(BattleHelper.GenerateHero($"Hero {i+1}, choose your hero: 1. Archer, 2. Swordman, 3. Paladin, 4. Mage, 5. Morphling"));
+                heroes.Add(BattleHelper.GenerateHero($"Hero {i + 2}, choose your hero: 1. Archer, 2. Swordman, 3. Paladin, 4. Mage, 5. Morphling"));
+                Console.WriteLine($"{heroes[i]} vs {heroes[i+1]}");
             }
-            //Warrior player_1 = BattleHelper.GenerateHero("Player 1, choose your hero: 1. Archer, 2. Swordman, 3. Paladin, 4. Mage, 5. Morphling");
-            //Warrior player_2 = BattleHelper.GenerateHero("Player 2, choose your hero: 1. Archer, 2. Swordman, 3. Paladin, 4. Mage, 5. Morphling");
-            //Warrior player_3 = BattleHelper.GenerateHero("Player 3, choose your hero: 1. Archer, 2. Swordman, 3. Paladin, 4. Mage, 5. Morphling");
-            //Warrior player_4 = BattleHelper.GenerateHero("Player 4, choose your hero: 1. Archer, 2. Swordman, 3. Paladin, 4. Mage, 5. Morphling");
+            return heroes;
         }
         public static Warrior GenerateHero(string question)
         {
