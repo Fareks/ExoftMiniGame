@@ -1,52 +1,23 @@
 ﻿using SuperPower;
 using Warriors;
 using Battles;
+using BattleHelpers;
+
 SuperPowerGenerator superPowerGenerator = new SuperPowerGenerator();
 SuperArmor superArmor = new SuperArmor();
-Warrior player1 = new Archer();
-Warrior player2 = new Archer();
 
 
-Console.WriteLine("Player 1, choose your hero:");
-Console.WriteLine("1: Archer, 2: Swordman, 3: Paladin, 4: Mage.");
-string player_1 = Console.ReadLine().ToString();
-Console.WriteLine("Player 2, choose your hero:");
-Console.WriteLine("1: Archer, 2: Swordman, 3: Paladin, 4: Mage.");
-string player_2 = Console.ReadLine().ToString();
-
-
-switch (player_1)
-{
-    case "1":
-        player1 = new Archer();
-        break;
-    case "2":
-        player1 = new Swordman();
-        break;
-    case "3":
-        player1 = new Paladin();
-        break;
-    case "4":
-        player1 = new Mage();
-        break;
-}
-
-switch (player_2)
-{
-    case "1":
-        player2 = new Archer();
-        break;
-    case "2":
-        player2 = new Swordman();
-        break;
-    case "3":
-        player2 = new Paladin();
-        break;
-    case "4":
-        player2 = new Mage();
-        break;
-}
-
-player2.AddSuperPower(superArmor, superPowerGenerator.getSuperPower());
-Console.WriteLine($" Prepare for battle! {player1.name} VS {player2.name}");
-Battle.StartBattle(player1, player2);
+Warrior player_1 = BattleHelper.GenerateHero("Player 1, choose your hero: 1. Archer, 2. Swordman, 3. Paladin, 4. Mage, 5. Morphling");
+Warrior player_2 = BattleHelper.GenerateHero("Player 2, choose your hero: 1. Archer, 2. Swordman, 3. Paladin, 4. Mage, 5. Morphling");
+Warrior player_3 = new Archer();
+Warrior player_4 = new Paladin();
+player_2.AddSuperPower(superArmor, superPowerGenerator.getSuperPower());
+player_1.AddSuperPower(superArmor, superPowerGenerator.getSuperPower());
+player_1.AddHP(5);
+Console.WriteLine($" Prepare for battle! {player_1.name} VS {player_2.name}");
+var battleTask = new Task(async()=> await Battle.StartBattle(player_1, player_2,1000));
+var battleTask2= new Task(async () => await Battle.StartBattle(player_3, player_4,500));
+battleTask.Start();
+battleTask2.Start();
+Console.WriteLine($" Status 1 {battleTask} ____ Status 2 {battleTask2}" );
+Console.ReadKey();
