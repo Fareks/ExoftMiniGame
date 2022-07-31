@@ -9,24 +9,21 @@ namespace BattleHelpers
 {
     public static class BattleHelper
     {
-        public static void StartAllBattles (List<Warrior> AllHeroes)
+        public static List<Task> StartAllBattles (List<Warrior> AllHeroes)
         {
-            //var battles = new List<Task>();
+            var battles = new List<Task>();
             for (int x=0; x < (AllHeroes.Count -1); x+=2)
             {
-                Task task;
                 
-                task = new Task(async () => Battle.StartBattle(AllHeroes[x], AllHeroes[x+1], 100));
-                Console.WriteLine($"Task started. Heroes: {AllHeroes[x].name} vs {AllHeroes[x + 1].name}");
+                battles.Add(new Task(() => Battle.StartBattle(AllHeroes[x], AllHeroes[x + 1], 100)));
+                Console.WriteLine($"Task created. Heroes: {AllHeroes[x].name} vs {AllHeroes[x + 1].name}");
                 //StartBattle завжди забускає всі битви з останніми обраними воїнами!
-                task.Start();
-
                 if( (x+2) > AllHeroes.Count-1)
                 {
                     break;
                 }
             }
-
+            return battles;
         }
         public static List<Warrior> GetHeroesList()
         {

@@ -13,8 +13,8 @@ heroes[0].AddSuperPower(superArmor, superPowerGenerator.getSuperPower());
 heroes[1].AddSuperPower(superArmor, superPowerGenerator.getSuperPower());
 heroes[0].AddHP(5);
 
-BattleHelper.StartAllBattles(heroes);
-
+List<Task> allBattles= BattleHelper.StartAllBattles(heroes);
+allBattles[0].Start();
 
 
 //ЗАПИТАТИСЬ ПРО ПРАВИЛЬНИЙ ЗАПУСК ТАСКІВ В ЛІСТІ
