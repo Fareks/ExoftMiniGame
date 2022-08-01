@@ -1,33 +1,30 @@
 ﻿using SuperPower;
 using Warriors;
-using Battles;
 using BattleHelpers;
-
-SuperPowerGenerator superPowerGenerator = new SuperPowerGenerator();
-SuperArmor superArmor = new SuperArmor();
-
-
-List<Warrior> heroes = BattleHelper.GetHeroesList();
-
-heroes[0].AddSuperPower(superArmor, superPowerGenerator.getSuperPower());
-heroes[1].AddSuperPower(superArmor, superPowerGenerator.getSuperPower());
-heroes[0].AddHP(5);
-
-List<Task> allBattles= BattleHelper.StartAllBattles(heroes);
-//allBattles[0].Start();
-
-
-//ЗАПИТАТИСЬ ПРО ПРАВИЛЬНИЙ ЗАПУСК ТАСКІВ В ЛІСТІ
-
-foreach (Task task in allBattles)
+public class Program
 {
-    task.Start();
+    public static async Task Main()
+    {
+        int input = 1;
+        do
+        {
+            SuperPowerGenerator superPowerGenerator = new SuperPowerGenerator();
+            SuperArmor superArmor = new SuperArmor();
+            List<Warrior> heroes = BattleHelper.GetHeroesList();
+
+            heroes[0].AddSuperPower(superArmor, superPowerGenerator.getSuperPower());
+            heroes[1].AddSuperPower(superArmor, superPowerGenerator.getSuperPower());
+            heroes[0].AddHP(5);
+
+            await Task.WhenAll(BattleHelper.GetAllBattles(heroes));
+
+            Console.WriteLine("Start new battle? 1 - Yes;  2 or any - No");
+
+            input = int.Parse(Console.ReadLine());
+
+        } while (input == 1);
+
+        Console.ReadKey();
+    }
 }
 
-//Parallel.ForEach(allBattles, task =>
-//{
-//    task.Start();
-//    Console.WriteLine("Task started!");
-//});
-
-Console.ReadKey();
