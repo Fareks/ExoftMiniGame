@@ -14,15 +14,15 @@ heroes[1].AddSuperPower(superArmor, superPowerGenerator.getSuperPower());
 heroes[0].AddHP(5);
 
 List<Task> allBattles= BattleHelper.StartAllBattles(heroes);
-allBattles[0].Start();
+//allBattles[0].Start();
 
 
 //ЗАПИТАТИСЬ ПРО ПРАВИЛЬНИЙ ЗАПУСК ТАСКІВ В ЛІСТІ
 
-//foreach (Task task in allBattles)
-//{
-//    task.Start();
-//}
+foreach (Task task in allBattles)
+{
+    task.Start();
+}
 
 //Parallel.ForEach(allBattles, task =>
 //{

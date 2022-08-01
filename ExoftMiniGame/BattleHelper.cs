@@ -12,12 +12,21 @@ namespace BattleHelpers
         public static List<Task> StartAllBattles (List<Warrior> AllHeroes)
         {
             var battles = new List<Task>();
-            for (int x=0; x < (AllHeroes.Count -1); x+=2)
+            
+            for (int x = 0; x < AllHeroes.Count; x += 2)
             {
-                
-                battles.Add(new Task(() => Battle.StartBattle(AllHeroes[x], AllHeroes[x + 1], 100)));
+                var w1 = AllHeroes[x];
+                var w2 = AllHeroes[x + 1];
+
+                var index = x;
+
+                battles.Add(new Task(() =>
+                {
+                    Battle.StartBattle(w1, w2, 100);
+
+                }));
                 Console.WriteLine($"Task created. Heroes: {AllHeroes[x].name} vs {AllHeroes[x + 1].name}");
-                //StartBattle завжди забускає всі битви з останніми обраними воїнами!
+
                 if( (x+2) > AllHeroes.Count-1)
                 {
                     break;
