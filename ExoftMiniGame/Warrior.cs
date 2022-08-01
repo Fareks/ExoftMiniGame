@@ -9,16 +9,12 @@ namespace Warriors
 {
     public abstract class Warrior
     {
-        protected int hp = 100;
-        protected int armor;
-        protected int attack;
+        
         public string name;
 
-        public int HP { get { return hp; } set { hp = value; } }
-        public int Attack { get { return attack; } set { attack = value; } }
-        public int Armor {get { return armor; }
-        set { armor = value; }}
-
+        public int HP { get; set; } = 100;
+        public int Attack { get; set; } = 10;
+        public int Armor { get; set; } = 10;
         public virtual void AddSuperPower( ISuperPower superPower, int x) 
         {
             superPower.AddSuperPower(this, x);
@@ -26,55 +22,62 @@ namespace Warriors
 
         public bool isAlive()
         {
-            if (hp > 0)
+            if (HP > 0)
             {
                 return true;
             }
             else { return false; }
         }
 
-        public void Defence(int enemy_damage)
+        public void Defense(int enemy_damage)
         {
-            if (armor > 0) //якщо є армор
+            if (Armor > 0) //якщо є армор
             {
                 if (enemy_damage > 1)//а шкода > 1
                 {   
-                    if ((enemy_damage/2) >= armor)
+                    if ((enemy_damage/2) >= Armor)
                     //якщо дамагу більше, аніж може впитати броня 
                     {
-                        hp -= enemy_damage - armor;
-                        armor = 0;
+                        HP -= enemy_damage - Armor;
+                        Armor = 0;
                     } else
                     {
-                        armor -= enemy_damage / 2;
-                        hp -= enemy_damage - (enemy_damage / 2); //враховуємо 
+
+                        Armor -= enemy_damage / 2;
+                        HP -= enemy_damage - (enemy_damage / 2); //враховуємо 
                                                                  //залишок від ділення чілочисельного int
                     }
 
                 }
                 else if (enemy_damage == 1)
                 {
-                    armor -= enemy_damage;
+                    Armor -= enemy_damage;
                 }
             } else { 
-                hp -= enemy_damage;                   
+                HP -= enemy_damage;                   
             }
         }
 
         public int Damage()
         {
-            if (armor > 0)
+            if (Armor > 0)
             {
-                return attack;
+                return Attack;
             } else
             {
-                if (attack > 1)
+                if (Attack > 1)
                 {
-                    attack--;
+                    Attack--;
                 }
-                return attack;
+                return Attack;
                 
             }
+        }
+
+        public static Warrior operator +(Warrior warrior1, Warrior warrior2)
+        {
+            Random random = new Random();
+            return new Morphling { HP = warrior1.HP + random.Next(-2, 2), Armor = warrior2.Armor + random.Next(-2, 2), Attack = warrior1.Attack + random.Next(-2, 2) };
         }
     }
 
@@ -83,13 +86,9 @@ namespace Warriors
        
         public Archer()
         {
-            attack = 12;
-            armor = 8;
+            Attack = 12;
+            Armor = 8;
             name = "Archer";
-        }
-        public override void AddSuperPower(ISuperPower superPower, int x)
-        {
-            superPower.AddSuperPower(this, x);
         }
     }
 
@@ -97,41 +96,42 @@ namespace Warriors
     {
         public Swordman()
         {
-            armor = 10;
-            attack = 10;
+            Armor = 10;
+            Attack = 10;
             name = "Swordman";
         }
-        public override void AddSuperPower(ISuperPower superPower, int x)
-        {
-            superPower.AddSuperPower(this, x);
-        }
+
     }
 
     internal class Paladin : Warrior
     {
         public Paladin()
         {
-            armor = 15;
-            attack = 5;
+            Armor = 15;
+            Attack = 5;
             name = "Paladin";
         }
-        public override void AddSuperPower(ISuperPower superPower, int x)
-        {
-            superPower.AddSuperPower(this, x);
-        }
+
     }
 
     internal class Mage : Warrior
     {
         public Mage()
         {
-            armor = 5;
-            attack = 15;
+            Armor = 5;
+            Attack = 15;
             name = "Mage";
         }
-        public override void AddSuperPower(ISuperPower superPower, int x)
+    }
+
+    internal class Morphling : Warrior
+    {
+        
+        public Morphling()
         {
-            superPower.AddSuperPower(this, x);
+            Armor = 10;
+            Attack = 10;
+            name = "Morphling";
         }
     }
 }
