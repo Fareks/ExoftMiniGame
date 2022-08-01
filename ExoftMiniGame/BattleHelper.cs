@@ -9,7 +9,7 @@ namespace BattleHelpers
 {
     public static class BattleHelper
     {
-        public static List<Task> StartAllBattles (List<Warrior> AllHeroes)
+        public static List<Task> GetAllBattles (List<Warrior> AllHeroes)
         {
             var battles = new List<Task>();
             
@@ -17,20 +17,8 @@ namespace BattleHelpers
             {
                 var w1 = AllHeroes[x];
                 var w2 = AllHeroes[x + 1];
-
-                var index = x;
-
-                battles.Add(new Task(() =>
-                {
-                    Battle.StartBattle(w1, w2, 100);
-
-                }));
-                Console.WriteLine($"Task created. Heroes: {AllHeroes[x].name} vs {AllHeroes[x + 1].name}");
-
-                if( (x+2) > AllHeroes.Count-1)
-                {
-                    break;
-                }
+                battles.Add(Battle.StartBattle(w1, w2, 100)); //таск вже буде ранитись, без .Start()
+                Console.WriteLine($"Task created. Heroes: {w1.name} vs {w2.name}");
             }
             return battles;
         }
@@ -75,7 +63,6 @@ namespace BattleHelpers
             while (hero == null);
             return hero;
         }
-
         public static Warrior GetHero(string input)
         {
             if (int.TryParse(input, out int result))
@@ -86,12 +73,13 @@ namespace BattleHelpers
                     2 => new Swordman(),
                     3 => new Paladin(),
                     4 => new Mage(),
-                    5 => new Archer()+ new Mage(),
+                    5 => new Archer() + new Mage(),
                     _ => null,
                 };
             }
             return null;
         }
+        
     }
     public static class MyExt
     {
