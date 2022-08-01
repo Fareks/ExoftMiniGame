@@ -9,19 +9,6 @@ namespace BattleHelpers
 {
     public static class BattleHelper
     {
-        public static List<Task> GetAllBattles (List<Warrior> AllHeroes)
-        {
-            var battles = new List<Task>();
-            
-            for (int x = 0; x < AllHeroes.Count; x += 2)
-            {
-                var w1 = AllHeroes[x];
-                var w2 = AllHeroes[x + 1];
-                battles.Add(Battle.StartBattle(w1, w2, 100)); //таск вже буде ранитись, без .Start()
-                Console.WriteLine($"Task created. Heroes: {w1.name} vs {w2.name}");
-            }
-            return battles;
-        }
         public static List<Warrior> GetHeroesList()
         {
             List<Warrior> heroes = new List<Warrior>();
