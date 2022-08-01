@@ -1,6 +1,8 @@
 ﻿using SuperPower;
 using Warriors;
 using BattleHelpers;
+using Battles;
+
 public class Program
 {
     public static async Task Main()
@@ -10,14 +12,16 @@ public class Program
         {
             SuperPowerGenerator superPowerGenerator = new SuperPowerGenerator();
             SuperArmor superArmor = new SuperArmor();
-            List<Warrior> heroes = BattleHelper.GetHeroesList();
+            var heroes = BattleHelper.GetHeroesList();
 
             heroes[0].AddSuperPower(superArmor, superPowerGenerator.getSuperPower());
             heroes[1].AddSuperPower(superArmor, superPowerGenerator.getSuperPower());
             heroes[0].AddHP(5);
 
-            await Task.WhenAll(BattleHelper.GetAllBattles(heroes));
-
+            var battleTasks = heroes
+                .Chunk(2)
+                .Select(x => Battle.StartBattle(x.First(), x.Last(), 100));
+            await Task.WhenAll(battleTasks);
             Console.WriteLine("Start new battle? 1 - Yes;  2 or any - No");
 
             input = int.Parse(Console.ReadLine());
