@@ -129,8 +129,8 @@ namespace Warriors
         
         public Morphling()
         {
-            Armor = 15;
-            Attack = 5;
+            Armor = 10;
+            Attack = 10;
             name = "Morphling";
         }
     }
